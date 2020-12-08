@@ -1,6 +1,6 @@
 tboot:
-  tBotUsername: resliv_travel_test_bot
-  tBootToken: 1450732291:AAFwmPTIePDMEqBXCsHp97-aRrZJQ3KFLXg
+  tBotUsername: BotUsername
+  tBootToken: BootToke
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
