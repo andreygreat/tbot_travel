@@ -28,18 +28,16 @@ class CityControllerIntegrationTest extends TravelApplicationIntegrationTests {
     @SneakyThrows
     void getCity() {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cities/1"))
-//                .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"Mogilew info\",\"actual\":true}"));
+                .andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"Mogilew info\"}"));
     }
 
     @Test
     @SneakyThrows
     void getCities() {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/cities/"))
-//                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.content().json("[]"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json("[{\"id\":1,\"name\":\"Mogilew\",\"info\":\"Mogilew info\"},{\"id\":2,\"name\":\"Moscow\",\"info\":\"Capital of Russia\"},{\"id\":3,\"name\":\"Minsk\",\"info\":\"Capital of Belarus\"},{\"id\":4,\"name\":\"Grodno\",\"info\":\"Grodno info\"},{\"id\":5,\"name\":\"Brest\",\"info\":\"Brest info\"}]"));
     }
 
     @Test
@@ -47,10 +45,9 @@ class CityControllerIntegrationTest extends TravelApplicationIntegrationTests {
     void create() {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/cities")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\" : \"Hamburg\", \"info\" : \"City in Germany\", \"actual\" : \"true\"}"))
-//                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json("{\"id\" : 15, \"name\" : \"Hamburg\", \"info\" : \"City in Germany\", \"actual\" : \"true\"}"));
+                .content("{\"name\" : \"Hamburg\", \"info\" : \"City in Germany\"}"))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.content().json("{\"id\" : 6, \"name\" : \"Hamburg\", \"info\" : \"City in Germany\"}"));
     }
 
     @Test
@@ -68,27 +65,22 @@ class CityControllerIntegrationTest extends TravelApplicationIntegrationTests {
     void update() {
         mockMvc.perform(MockMvcRequestBuilders.put("/api/cities/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"Mogilew City in Belarus\",\"actual\":true}"))
-//                .andDo(print())
+                .content("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"City in Belarus\"}"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"Mogilew City in Belarus\",\"actual\":true}"));
+                .andExpect(MockMvcResultMatchers.content().json("{\"id\":1,\"name\":\"Mogilew\",\"info\":\"City in Belarus\"}"));
     }
 
     @Test
     @SneakyThrows
     void deleteOk() {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cities/20"))
-//                .andDo(print())
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-//                .andExpect(MockMvcResultMatchers.content().json(""));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/cities/5"))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
     @Test
     @SneakyThrows
     void deleteFail() {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cities/20"))
-//                .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-//                .andExpect(MockMvcResultMatchers.content().json(""));
     }
 }

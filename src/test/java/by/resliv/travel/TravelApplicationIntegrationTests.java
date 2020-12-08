@@ -19,7 +19,7 @@ public class TravelApplicationIntegrationTests {
     private static PostgreSQLContainer sqlContainer;
 
     static {
-        sqlContainer = new PostgreSQLContainer("postgres:10.7")
+        sqlContainer = new PostgreSQLContainer("postgres:12.5")
                 .withDatabaseName("integration-tests-db")
                 .withUsername("user")
                 .withPassword("password");

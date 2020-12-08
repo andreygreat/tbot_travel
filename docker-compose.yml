@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres:12.5
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=resliv_travel
+    ports:
+      - "5433:5432"
+
+  travle:
+    image: travel
+    ports:
+      - "8083:8083"
