@@ -2,7 +2,7 @@ package by.resliv.travel.services;
 
 
 import by.resliv.travel.entities.City;
-import by.resliv.travel.exception.BadRequestException;
+import by.resliv.travel.exceptions.BadRequestException;
 import by.resliv.travel.repositories.CityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -51,13 +51,7 @@ public class CityService {
             throw new BadRequestException(HttpServletResponse.SC_BAD_REQUEST,
                     "Duplicate name city");
         }
-        try {
-            return cityRepository.save(city);
-        } catch (DataAccessException e) {
-            log.error("Data Base Error: " + e.getMessage());
-            throw new BadRequestException(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "Data Base Error: " + e.getMessage());
-        }
+        return cityRepository.save(city);
     }
 
     public City update(Integer id, City city) {
@@ -69,19 +63,12 @@ public class CityService {
         return cityRepository.findAll(page).toList();
     }
 
-    public boolean delete(int id) {
+    public void delete(int id) {
         if (cityRepository.findById(id).isEmpty()) {
             throw new BadRequestException(HttpServletResponse.SC_BAD_REQUEST,
                     "Not found city with id = " + id);
         } else {
-            try {
-                cityRepository.deleteById(id);
-                return true;
-            } catch (DataAccessException e) {
-                log.error("Data Base Error: " + e.getMessage());
-                throw new BadRequestException(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                        "Data Base Error: " + e.getMessage());
-            }
+            cityRepository.deleteById(id);
         }
     }
 
