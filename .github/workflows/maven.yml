@@ -27,8 +27,8 @@ jobs:
     - name: Build docker image
       run: docker build  -t travelbot  .
     - name: Add GitHub repository tag
-      run: docker tag  travelbot docker.pkg.github.com/andreygreat/tbot_travel/travelbot:1.0
+      run: docker tag  travelbot andreygreat/tbot_travel
     - name: GitHub authorize
-      run:  docker login docker.pkg.github.com -u andreygreat --password ${{ secrets.GITHUB_TOKEN }}
+      run:  docker login  -u andreygreat --password ${{secrets.SuperSecret }}
     - name: Push image to repository
-      run:  docker push docker.pkg.github.com/andreygreat/tbot_travel/travelbot:1.0
+      run:  docker push andreygreat/tbot_travel
