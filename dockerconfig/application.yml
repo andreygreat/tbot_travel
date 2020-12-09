@@ -4,9 +4,13 @@ tboot:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
+# Windows url
     url: jdbc:postgresql://docker.for.win.localhost:5433/resliv_travel
+# Linux url
 #    url: jdbc:postgresql://localhost:5433/resliv_travel
     username: postgres
     password: password
+  jpa:
+    show-sql: false
 server:
   port: 8083
