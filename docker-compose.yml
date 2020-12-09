@@ -10,7 +10,7 @@ services:
       - "5433:5432"
 
   travel:
-    image: docker.pkg.github.com/andreygreat/tbot_travel/travelbot:1.0
+    image: andreygreat/tbot_travel
     ports:
       - "8083:8083"
     volumes:
