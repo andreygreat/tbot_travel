@@ -1,15 +1,17 @@
 version: "3"
 services:
   db:
-    image: postgres
+    image: postgres:12.5
     environment:
-      - POSTGRES_USER=postgres:12.5
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=resliv_travel
     ports:
       - "5433:5432"
 
-  travle:
-    image: travel
+  travel:
+    image: docker.pkg.github.com/andreygreat/tbot_travel/travelbot:1.0
     ports:
       - "8083:8083"
+    volumes:
+      - ./dockerconfig/application.yml:/application.yml:ro
